@@ -93,6 +93,10 @@ public class camera extends AppCompatActivity {
         String result = obj.toString();
         Toast.makeText(this, "The number is " + result, Toast.LENGTH_SHORT).show();
 
+        int number = Integer.parseInt(result);
+        VoicePlayer player = new VoicePlayer(getBaseContext(), number);
+        player.play();
+
         /*
         obj = pyO.callAttr("main2", encodedImage);
         String num = obj.toString();

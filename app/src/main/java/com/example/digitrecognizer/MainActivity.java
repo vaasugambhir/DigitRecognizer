@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
         String result = obj.toString();
         Toast.makeText(this, "The number is " + result, Toast.LENGTH_SHORT).show();
 
+        int number = Integer.parseInt(result);
+        VoicePlayer player = new VoicePlayer(getBaseContext(), number);
+        player.play();
+
         /*
         obj = pyO.callAttr("main2", encodedImage);
         String num = obj.toString();
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         return bitmap;
     }
 
+    /*
     public static float px2dp(Resources resource, float px)  {
         return TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_PX,
@@ -116,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
                 resource.getDisplayMetrics()
         );
     }
+
+     */
 
     public String getStringImage(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
