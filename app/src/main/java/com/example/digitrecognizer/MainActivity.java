@@ -2,21 +2,15 @@ package com.example.digitrecognizer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chaquo.python.PyObject;
@@ -67,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void convert(View v) {
         int h = myDrawingKit.retHeight(), w = myDrawingKit.retWidth();
-        Bitmap px_colors_bitmap = createBitmapFromView(myDrawingKit, w, h, getApplicationContext());
+        Bitmap px_colors_bitmap = createBitmapFromView(myDrawingKit, w, h);
         String encodedImage = getStringImage(px_colors_bitmap);
 
         // passing string in python
@@ -93,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         myDrawingKit.clear();
     }
 
-    public @NonNull Bitmap createBitmapFromView(@NonNull View view, int width, int height, Context context) {
+    public @NonNull Bitmap createBitmapFromView(@NonNull View view, int width, int height) {
         if (width > 0 && height > 0) {
             view.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
                     View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY));
