@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         py = Python.getInstance();
 
+        navigationView.setSelectedItemId(R.id.nav_paint);
 
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
