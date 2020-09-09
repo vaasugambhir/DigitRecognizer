@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.MenuItem;
@@ -27,12 +28,14 @@ public class camera extends AppCompatActivity {
     private final int RC_PIC_CODE = 101;
     private ImageView myPic;
     private Python py;
+    private LoadingAlert alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        alert = new LoadingAlert(this);
         myPic = findViewById(R.id.camera_img);
 
         if (!Python.isStarted())
@@ -84,6 +87,7 @@ public class camera extends AppCompatActivity {
     }
 
     public void convert(View v) {
+        alert.startLoading();
         BitmapDrawable drawable = (BitmapDrawable)myPic.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         String encodedImage = getStringImage(bitmap);
@@ -91,12 +95,22 @@ public class camera extends AppCompatActivity {
         // passing string in python
         PyObject pyO = py.getModule("CharacterDetector");
         PyObject obj = pyO.callAttr("main", encodedImage);
-        String result = obj.toString();
-        Toast.makeText(this, "The number is " + result, Toast.LENGTH_SHORT).show();
+        final String result = obj.toString();
 
-        int number = Integer.parseInt(result);
-        VoicePlayer player = new VoicePlayer(getBaseContext(), number);
-        player.play();
+        new CountDownTimer(2000, 2000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                alert.dismissDialog();
+                Toast.makeText(camera.this, "The number is " + result, Toast.LENGTH_SHORT).show();
+                int number = Integer.parseInt(result);
+                VoicePlayer player = new VoicePlayer(getBaseContext(), number);
+                player.play();
+            }
+        }.start();
 
         /*
         obj = pyO.callAttr("main2", encodedImage);

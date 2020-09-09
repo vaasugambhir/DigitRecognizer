@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PaintView myDrawingKit;
     private Python py;
+    private LoadingAlert alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         myDrawingKit = findViewById(R.id.my_drawing_kit);
+
+        alert = new LoadingAlert(this);
 
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setSelectedItemId(R.id.nav_paint);
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void convert(View v) {
+        alert.startLoading();
         int h = myDrawingKit.retHeight(), w = myDrawingKit.retWidth();
         Bitmap px_colors_bitmap = createBitmapFromView(myDrawingKit, w, h);
         String encodedImage = getStringImage(px_colors_bitmap);
@@ -68,12 +73,22 @@ public class MainActivity extends AppCompatActivity {
         // passing string in python
         PyObject pyO = py.getModule("CharacterDetector");
         PyObject obj = pyO.callAttr("main", encodedImage);
-        String result = obj.toString();
-        Toast.makeText(this, "The number is " + result, Toast.LENGTH_SHORT).show();
+        final String result = obj.toString();
 
-        int number = Integer.parseInt(result);
-        VoicePlayer player = new VoicePlayer(getBaseContext(), number);
-        player.play();
+        new CountDownTimer(2000, 2000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                alert.dismissDialog();
+                Toast.makeText(MainActivity.this, "The number is " + result, Toast.LENGTH_SHORT).show();
+                int number = Integer.parseInt(result);
+                VoicePlayer player = new VoicePlayer(getBaseContext(), number);
+                player.play();
+            }
+        }.start();
 
         /*
         obj = pyO.callAttr("main2", encodedImage);
