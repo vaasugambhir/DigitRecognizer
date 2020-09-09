@@ -1,7 +1,12 @@
 package com.example.digitrecognizer;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +17,7 @@ import android.os.CountDownTimer;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaquo.python.PyObject;
@@ -19,8 +25,11 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.example.digitrecognizer.myViews.PaintView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,14 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
         alert = new LoadingAlert(this);
 
-        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
-        navigationView.setSelectedItemId(R.id.nav_paint);
+        navStuff();
 
         if (!Python.isStarted())
             Python.start(new AndroidPlatform(getApplicationContext()));
 
         py = Python.getInstance();
+    }
 
+    public void navStuff() {
+        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
+        navigationView.setSelectedItemId(R.id.nav_paint);
         navigationView.setSelectedItemId(R.id.nav_paint);
 
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,10 +86,9 @@ public class MainActivity extends AppCompatActivity {
         PyObject pyO = py.getModule("CharacterDetector");
         PyObject obj = pyO.callAttr("main", encodedImage);
         final String result = obj.toString();
-
         new CountDownTimer(2000, 2000) {
             @Override
-            public void onTick(long millisUntilFinished) {
+            public void onTick(long l) {
             }
 
             @Override
