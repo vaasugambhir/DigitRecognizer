@@ -1,12 +1,11 @@
 package com.example.digitrecognizer;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,7 +16,6 @@ import android.os.CountDownTimer;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaquo.python.PyObject;
@@ -25,17 +23,18 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.example.digitrecognizer.myViews.PaintView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private PaintView myDrawingKit;
     private Python py;
     private LoadingAlert alert;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         myDrawingKit = findViewById(R.id.my_drawing_kit);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Paint");
+        setSupportActionBar(toolbar);
 
         alert = new LoadingAlert(this);
 
-        navStuff();
+        navStuff1();
 
         if (!Python.isStarted())
             Python.start(new AndroidPlatform(getApplicationContext()));
@@ -54,27 +56,17 @@ public class MainActivity extends AppCompatActivity {
         py = Python.getInstance();
     }
 
-    public void navStuff() {
-        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
-        navigationView.setSelectedItemId(R.id.nav_paint);
-        navigationView.setSelectedItemId(R.id.nav_paint);
+    private void navStuff1() {
+        drawerLayout = findViewById(R.id.drawer_activity);
+        navigationView = findViewById(R.id.navigation_view);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_cam:
-                        startActivity(new Intent(getApplicationContext(), camera.class));
-                        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
-                        finish();
-                        return true;
-                    case R.id.nav_paint:
-                        return true;
-                }
-                return false;
-            }
-        });
+        navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     public void convert(View v) {
         alert.startLoading();
@@ -150,5 +142,31 @@ public class MainActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else
+            super.onBackPressed();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.nav_paint:
+                break;
+            case R.id.nav_cam:
+                startActivity(new Intent(getApplicationContext(), camera.class));
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                finish();
+                break;
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

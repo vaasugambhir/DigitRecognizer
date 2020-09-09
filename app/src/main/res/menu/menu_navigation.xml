@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/nav_paint"
-        android:title="PAINT"
-        android:icon="@drawable/ic_brush"/>
 
-    <item
-        android:id="@+id/nav_cam"
-        android:title="CAMERA"
-        android:icon="@drawable/ic_camera"/>
+    <item android:title="Learn">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_paint"
+                    android:icon="@drawable/ic_painting"
+                    android:title="Paint" />
+
+                <item
+                    android:id="@+id/nav_cam"
+                    android:icon="@drawable/ic_cam_color"
+                    android:title="Camera" />
+            </group>
+
+        </menu>
+
+    </item>
+
 
 </menu>
