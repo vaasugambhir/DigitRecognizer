@@ -22,7 +22,6 @@ import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.example.digitrecognizer.myViews.PaintView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayOutputStream;
@@ -33,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Python py;
     private LoadingAlert alert;
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     private Toolbar toolbar;
 
     @Override
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void navStuff1() {
         drawerLayout = findViewById(R.id.drawer_activity);
-        navigationView = findViewById(R.id.navigation_view);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
