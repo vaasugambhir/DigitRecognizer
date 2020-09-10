@@ -30,7 +30,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     public void start(View v){
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, Paint.class));
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         finish();
     }

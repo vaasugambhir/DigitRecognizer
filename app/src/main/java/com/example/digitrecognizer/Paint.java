@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -27,19 +28,21 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayOutputStream;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Paint extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private PaintView myDrawingKit;
     private Python py;
     private LoadingAlert alert;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
+    final int vibrationSeconds = 5;
+    final int countDownSeconds = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
         myDrawingKit = findViewById(R.id.my_drawing_kit);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Paint");
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.navigation_view);
         setListener();
         navigationView.setItemIconTintList(null);
+        //navigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.colorBlueDark)));
+        //navigationView.setItemBackgroundResource(R.color.colorBlueLight);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setListener() {
         final Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        final CountDownTimer countDownTimer = new CountDownTimer(20,20) {
+        final CountDownTimer countDownTimer = new CountDownTimer(countDownSeconds,countDownSeconds) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -79,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onFinish() {
-                vibrator.vibrate(20);
+                vibrator.vibrate(vibrationSeconds);
                 start();
             }
         };
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                vibrator.vibrate(20);
+                vibrator.vibrate(vibrationSeconds);
                 countDownTimer.start();
             }
 
@@ -125,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onFinish() {
                 alert.dismissDialog();
-                Toast.makeText(MainActivity.this, "The number is " + result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Paint.this, "The number is " + result, Toast.LENGTH_SHORT).show();
                 int number = Integer.parseInt(result);
                 VoicePlayer player = new VoicePlayer(getBaseContext(), number);
                 player.play();

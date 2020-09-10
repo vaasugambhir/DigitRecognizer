@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -37,6 +38,9 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
     private LoadingAlert alert;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
+    private boolean taken = false;
+    final int vibrationSeconds = 5;
+    final int countDownSeconds = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,8 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
         setListener();
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setItemIconTintList(null);
+        //navigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.colorRedLight)));
+        //navigationView.setItemBackgroundResource(R.color.colorRedDark);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
@@ -82,7 +88,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
 
     private void setListener() {
         final Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        final CountDownTimer countDownTimer = new CountDownTimer(20,20) {
+        final CountDownTimer countDownTimer = new CountDownTimer(countDownSeconds,countDownSeconds) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -90,7 +96,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
 
             @Override
             public void onFinish() {
-                vibrator.vibrate(20);
+                vibrator.vibrate(vibrationSeconds);
                 start();
             }
         };
@@ -101,7 +107,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                vibrator.vibrate(20);
+                vibrator.vibrate(vibrationSeconds);
                 countDownTimer.start();
             }
 
@@ -132,6 +138,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
                 Bitmap picture = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
                 myPic.setImageBitmap(picture);
                 myPic.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                taken = true;
             }
             else {
                 Toast.makeText(this, "Try again :(", Toast.LENGTH_SHORT).show();
@@ -140,6 +147,10 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
     }
 
     public void convert(View v) {
+        if (!taken) {
+            Toast.makeText(this, "Please take a picture first", Toast.LENGTH_SHORT).show();
+            return;
+        }
         alert.startLoading();
         BitmapDrawable drawable = (BitmapDrawable)myPic.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
@@ -187,7 +198,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
             case R.id.nav_cam:
                 break;
             case R.id.nav_paint:
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), Paint.class));
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 finish();
                 break;

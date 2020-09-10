@@ -7,4 +7,6 @@
     <color name="colorBlueDark">#003851</color>
     <color name="colorRedLight">@android:color/holo_red_light</color>
     <color name="colorRedDark">#3A0000</color>
+    <color name="colorGreenLight">#56CF00</color>
+    <color name="colorGreenDark">#083500</color>
 </resources>
