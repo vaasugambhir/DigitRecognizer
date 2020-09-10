@@ -8,13 +8,12 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.example.digitrecognizer.R;
 
-public class PaintView extends View {
+public class PaintView extends androidx.appcompat.widget.AppCompatImageView {
 
     private Paint brush;
     private Path drawing;
@@ -33,11 +32,13 @@ public class PaintView extends View {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
-
+    /*
     public PaintView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs);
     }
+
+     */
 
     public void init(@Nullable AttributeSet set) {
         drawing = new Path();
@@ -55,13 +56,12 @@ public class PaintView extends View {
         float X = event.getX();
         float Y = event.getY();
 
-        ( (Activity) getContext()).findViewById(R.id.button_convert).setEnabled(true);
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 drawing.moveTo(X, Y);
                 return true;
             case MotionEvent.ACTION_MOVE:
+                ( (Activity) getContext()).findViewById(R.id.button_convert).setEnabled(true);
                 drawing.lineTo(X, Y);
                 break;
             default:

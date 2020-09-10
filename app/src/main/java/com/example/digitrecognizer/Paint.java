@@ -141,11 +141,17 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
         }.start();
 
         /*
+        myDrawingKit.setVisibility(View.INVISIBLE);
         obj = pyO.callAttr("main2", encodedImage);
         String num = obj.toString();
+        System.out.println(num);
         byte[] data = android.util.Base64.decode(num, Base64.DEFAULT);
         Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-        myPic.setImageBitmap(bmp);
+        imageView.setImageBitmap(bmp);
+        imageView.setVisibility(View.VISIBLE);
+        System.out.println(imageView);
+        System.out.println(imageView.getHeight() + " " + imageView.getWidth());
+
          */
     }
 

@@ -10,7 +10,7 @@ from PIL import Image
 def main(data):
     decoded_data = base64.b64decode(data)
     np_data = numpy.fromstring(decoded_data, numpy.uint8)
-    img = cv2.imdecode(np_data, cv2.IMREAD_UNCHANGED)
+    img = numpy.array(cv2.imdecode(np_data, cv2.IMREAD_UNCHANGED))
 
     parameters = get_parameters()
 
@@ -31,14 +31,13 @@ def main2(data):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     _, img = cv2.threshold(img, 80, 255, cv2.THRESH_BINARY_INV)
 
-    img = img.astype(numpy.uint8)
 
     pil_im = Image.fromarray(img)
 
     buff = io.BytesIO()
     pil_im.save(buff, format = "PNG")
     img_str = base64.b64decode(buff.getvalue())
-    return str(img_str)
+    return "" + str(img_str, 'utf-8')
 
 
 def number_exist(x):
@@ -46,10 +45,8 @@ def number_exist(x):
 
 
 def fix_image(x):
-    print(x.shape)
     x = cv2.cvtColor(x, cv2.COLOR_BGR2GRAY)
     _, x = cv2.threshold(x, 80, 255, cv2.THRESH_BINARY_INV)
-
     # part 1: up
     top, bottom = 0, 0
     for i in range(len(x)):
@@ -91,19 +88,16 @@ def fix_image(x):
     width = right - left
     height = bottom - top
 
-    print(x.shape)
 
     x = numpy.concatenate((numpy.zeros((height, 20)), x), axis=1)
     x = numpy.concatenate((x, numpy.zeros((height, 20))), axis=1)
     x = numpy.concatenate((numpy.zeros((20, width + 40)), x), axis=0)
     x = numpy.concatenate((x, numpy.zeros((20, width + 40))), axis=0)
 
-    print(x.shape)
 
-    x = cv2.resize(x, (28, 28))
-    print(x.shape)
+    x = cv2.resize(x, (28, 28), interpolation = cv2.INTER_NEAREST)
+
     x = x.reshape((784, 1))
-    print(x.shape)
 
     x /= 255
 
