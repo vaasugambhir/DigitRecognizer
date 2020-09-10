@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void navStuff1() {
         drawerLayout = findViewById(R.id.drawer_activity);
         NavigationView navigationView = findViewById(R.id.navigation_view);
-        //setListener();
+        setListener();
         navigationView.setItemIconTintList(null);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
+                System.out.println("here");
                 vibrator.vibrate(20);
                 countDownTimer.start();
             }
