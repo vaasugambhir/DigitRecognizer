@@ -32,13 +32,6 @@ public class PaintView extends androidx.appcompat.widget.AppCompatImageView {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
-    /*
-    public PaintView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs);
-    }
-
-     */
 
     public void init(@Nullable AttributeSet set) {
         drawing = new Path();
