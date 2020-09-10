@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -41,6 +42,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
     private boolean taken = false;
     final int vibrationSeconds = 5;
     final int countDownSeconds = 20;
+    private MediaPlayer player, player1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,9 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
         toolbar.setTitle("Camera");
         setSupportActionBar(toolbar);
 
+        player = MediaPlayer.create(this, R.raw.button);
+        player1 = MediaPlayer.create(this, R.raw.button1);
+
         if (!Python.isStarted())
             Python.start(new AndroidPlatform(this));
 
@@ -64,6 +69,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
 
     @Override
     public void onBackPressed() {
+        player.start();
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
@@ -123,6 +129,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
     }
 
     public void takePic(View v) {
+        player.start();
         Intent goToCam = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(goToCam, RC_PIC_CODE);
     }
@@ -145,6 +152,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
     }
 
     public void convert(View v) {
+        player.start();
         if (!taken) {
             Toast.makeText(this, "Please take a picture first", Toast.LENGTH_SHORT).show();
             return;
@@ -192,6 +200,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        player1.start();
         switch (item.getItemId()) {
             case R.id.nav_cam:
                 break;

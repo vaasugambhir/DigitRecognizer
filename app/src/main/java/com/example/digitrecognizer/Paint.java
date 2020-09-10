@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -36,6 +37,7 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
     private Toolbar toolbar;
     final int vibrationSeconds = 5;
     final int countDownSeconds = 20;
+    private MediaPlayer player, player1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,9 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
         toolbar.setTitle("Paint");
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorBlueLight));
         setSupportActionBar(toolbar);
+
+        player = MediaPlayer.create(this, R.raw.button);
+        player1 = MediaPlayer.create(this, R.raw.button1);
 
         alert = new LoadingAlert(this);
 
@@ -110,6 +115,7 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public void convert(View v) {
+        player.start();
         alert.startLoading();
         int h = myDrawingKit.retHeight(), w = myDrawingKit.retWidth();
         Bitmap px_colors_bitmap = createBitmapFromView(myDrawingKit, w, h);
@@ -144,6 +150,7 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public void clear_kit(View view) {
+        player.start();
         myDrawingKit.clear();
     }
 
@@ -187,6 +194,7 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
 
     @Override
     public void onBackPressed() {
+        player.start();
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
@@ -196,7 +204,7 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+        player1.start();
         switch (item.getItemId()) {
             case R.id.nav_paint:
                 break;
