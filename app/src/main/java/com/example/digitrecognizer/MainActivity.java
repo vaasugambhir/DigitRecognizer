@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                System.out.println("here");
                 vibrator.vibrate(20);
                 countDownTimer.start();
             }
