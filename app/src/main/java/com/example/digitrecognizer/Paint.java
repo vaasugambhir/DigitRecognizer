@@ -150,6 +150,7 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public void clear_kit(View view) {
+        findViewById(R.id.button_convert).setEnabled(false);
         player.start();
         myDrawingKit.clear();
     }

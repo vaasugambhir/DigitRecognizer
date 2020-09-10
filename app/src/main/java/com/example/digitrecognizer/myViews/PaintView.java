@@ -1,5 +1,6 @@
 package com.example.digitrecognizer.myViews;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.example.digitrecognizer.R;
 
 public class PaintView extends View {
 
@@ -51,6 +54,8 @@ public class PaintView extends View {
 
         float X = event.getX();
         float Y = event.getY();
+
+        ( (Activity) getContext()).findViewById(R.id.button_convert).setEnabled(true);
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
