@@ -76,8 +76,6 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
         setListener();
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setItemIconTintList(null);
-        //navigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.colorRedLight)));
-        //navigationView.setItemBackgroundResource(R.color.colorRedDark);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);

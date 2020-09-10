@@ -5,7 +5,11 @@
         <item name="colorPrimary">#000000</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:statusBarColor">#000000</item>
     </style>
 
+    <style name="menu_text_font">
+        <item name="fontFamily">@font/averia_libre_light</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>

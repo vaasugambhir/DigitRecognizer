@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/aclonica</item>
         <item>@font/almendra_bold</item>
         <item>@font/architects_daughter</item>
         <item>@font/atomic_age</item>
+        <item>@font/audiowide</item>
         <item>@font/averia_sans_libre_light</item>
         <item>@font/baumans</item>
+        <item>@font/bubbler_one</item>
         <item>@font/cabin_sketch</item>
         <item>@font/caesar_dressing</item>
     </array>

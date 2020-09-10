@@ -19,6 +19,7 @@
         app:itemTextColor="@color/colorGreenLight"
         app:itemBackground="@color/colorGreenDark"
         app:itemIconSize="35sp"
+        app:itemTextAppearance="@style/menu_text_font"
         android:layout_gravity="start" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +34,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/caesar_dressing"
+            android:fontFamily="@font/bubbler_one"
             android:text="Camera"
             android:textColor="@color/colorRedLight"
             android:textSize="50sp"
@@ -60,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:background="@color/colorRedLight"
-            android:fontFamily="@font/architects_daughter"
+            android:fontFamily="@font/audiowide"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:onClick="takePic"
             android:text="take picture"
@@ -78,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:background="@color/colorRedLight"
-            android:fontFamily="@font/architects_daughter"
+            android:fontFamily="@font/audiowide"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:onClick="convert"
             android:text="get result"

@@ -8,7 +8,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -64,8 +63,6 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
         NavigationView navigationView = findViewById(R.id.navigation_view);
         setListener();
         navigationView.setItemIconTintList(null);
-        //navigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.colorBlueDark)));
-        //navigationView.setItemBackgroundResource(R.color.colorBlueLight);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
