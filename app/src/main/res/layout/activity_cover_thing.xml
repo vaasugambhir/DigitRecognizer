@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/bg2"
     android:onClick="start"
-    tools:context=".cover_thing">
+    tools:context=".SplashScreen">
 
 
 

@@ -29,7 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public class camera extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Camera extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private final int RC_PIC_CODE = 101;
     private ImageView myPic;
@@ -158,7 +158,7 @@ public class camera extends AppCompatActivity implements NavigationView.OnNaviga
             @Override
             public void onFinish() {
                 alert.dismissDialog();
-                Toast.makeText(camera.this, "The number is " + result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Camera.this, "The number is " + result, Toast.LENGTH_SHORT).show();
                 int number = Integer.parseInt(result);
                 VoicePlayer player = new VoicePlayer(getBaseContext(), number);
                 player.play();

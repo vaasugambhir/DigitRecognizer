@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_paint:
                 break;
             case R.id.nav_cam:
-                startActivity(new Intent(getApplicationContext(), camera.class));
+                startActivity(new Intent(getApplicationContext(), Camera.class));
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 finish();
                 break;

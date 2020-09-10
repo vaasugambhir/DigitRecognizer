@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorRedDark"
     android:id="@+id/drawer_activity1"
-    tools:context=".camera"
+    tools:context=".Camera"
     tools:openDrawer="start"
     android:fitsSystemWindows="true">
 
