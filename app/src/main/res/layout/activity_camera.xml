@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg5"
+    android:background="@color/colorRedDark"
     android:id="@+id/drawer_activity1"
     tools:context=".camera"
     tools:openDrawer="start"
@@ -16,6 +16,7 @@
         android:id="@+id/navigation_view"
         app:headerLayout="@layout/header"
         app:menu="@menu/menu_navigation"
+        app:itemIconSize="35sp"
         android:layout_gravity="start" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/caesar_dressing"
             android:text="Camera"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorRedLight"
             android:textSize="50sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +57,7 @@
             android:id="@+id/take_pic"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:background="#FF6944"
+            android:background="@color/colorRedLight"
             android:fontFamily="@font/architects_daughter"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:onClick="takePic"
@@ -74,7 +75,7 @@
             android:id="@+id/get_number"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:background="#FF6944"
+            android:background="@color/colorRedLight"
             android:fontFamily="@font/architects_daughter"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:onClick="convert"

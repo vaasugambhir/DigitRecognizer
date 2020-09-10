@@ -8,12 +8,12 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_paint"
-                    android:icon="@drawable/ic_painting"
+                    android:icon="@drawable/painting"
                     android:title="Paint" />
 
                 <item
                     android:id="@+id/nav_cam"
-                    android:icon="@drawable/ic_cam_color"
+                    android:icon="@drawable/camera"
                     android:title="Camera" />
             </group>
 

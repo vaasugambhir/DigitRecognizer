@@ -5,7 +5,7 @@
     android:id="@+id/drawer_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg4"
+    android:background="@color/colorBlueDark"
     tools:context=".MainActivity"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         android:id="@+id/navigation_view"
         app:headerLayout="@layout/header"
+        app:itemIconSize="35dp"
         app:menu="@menu/menu_navigation"
         android:layout_gravity="start" />
 
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/caesar_dressing"
             android:text="Paint"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorBlueLight"
             android:textSize="50sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +56,7 @@
             android:id="@+id/button_convert"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:background="#FF6944"
+            android:background="@color/colorBlueLight"
             android:fontFamily="@font/architects_daughter"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:onClick="convert"
@@ -73,7 +74,7 @@
             android:id="@+id/button_clear"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:background="#FF6944"
+            android:background="@color/colorBlueLight"
             android:fontFamily="@font/architects_daughter"
             android:foreground="?attr/selectableItemBackgroundBorderless"
             android:onClick="clear_kit"

@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.MenuItem;
@@ -68,13 +69,53 @@ public class camera extends AppCompatActivity implements NavigationView.OnNaviga
 
     private void navStuff1() {
         drawerLayout = findViewById(R.id.drawer_activity1);
+        setListener();
         NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setItemIconTintList(null);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void setListener() {
+        final Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        final CountDownTimer countDownTimer = new CountDownTimer(20,20) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                vibrator.vibrate(20);
+                start();
+            }
+        };
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                vibrator.vibrate(20);
+                countDownTimer.start();
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+                vibrator.cancel();
+                countDownTimer.cancel();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
     }
 
     public void takePic(View v) {
