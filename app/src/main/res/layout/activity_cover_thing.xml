@@ -4,11 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg2"
     android:onClick="start"
+    android:background="@android:color/black"
     tools:context=".SplashScreen">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/digi_rec"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.651"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/scanner" />
 
     <TextView
         android:id="@+id/head"
@@ -17,12 +37,11 @@
         android:fontFamily="@font/cabin_sketch"
         android:text="DIGIT\nRECOGNIZER"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="#FF9800"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.139" />
@@ -33,7 +52,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/baumans"
         android:text="Created by Vaasu Gambhir"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/holo_orange_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,6 +71,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        android:textColor="@android:color/holo_orange_dark"
+        app:layout_constraintVertical_bias="0.85" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

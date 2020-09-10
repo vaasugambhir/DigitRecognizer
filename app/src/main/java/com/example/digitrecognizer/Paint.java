@@ -202,7 +202,7 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
                 break;
             case R.id.nav_cam:
                 startActivity(new Intent(getApplicationContext(), Camera.class));
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright1);
                 finish();
                 break;
         }

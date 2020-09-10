@@ -197,7 +197,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
                 break;
             case R.id.nav_paint:
                 startActivity(new Intent(getApplicationContext(), Paint.class));
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                overridePendingTransition(R.anim.righttoleft, R.anim.righttoleft1);
                 finish();
                 break;
         }
