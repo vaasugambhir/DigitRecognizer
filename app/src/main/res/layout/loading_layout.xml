@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:padding="20dp"
-    android:background="@drawable/my_bg"
+    android:background="@drawable/alert_bg"
     android:layout_height="wrap_content">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="200dp"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,17 +21,5 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/ultra" />
 
-    <TextView
-        android:id="@+id/loading_alert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/averia_sans_libre_light"
-        android:paddingBottom="40dp"
-        android:text="reading your number..."
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/animation" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
