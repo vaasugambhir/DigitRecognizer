@@ -17,7 +17,6 @@ public class PaintView extends androidx.appcompat.widget.AppCompatImageView {
 
     private Paint brush;
     private Path drawing;
-    private int x;
 
     public PaintView(Context context) {
         super(context);
