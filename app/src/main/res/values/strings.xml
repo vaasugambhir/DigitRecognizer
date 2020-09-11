@@ -2,4 +2,5 @@
     <string name="app_name">Digit Recognizer</string>
     <string name="open_drawer">Open navigation drawer</string>
     <string name="close_drawer">Close navigation drawer</string>
+    <string name="my_detail">Hey all!\n\nWelcome to the Digit Recognizer app!\n\nThere are two options to get the output of your handwritten digit, one is by painting the digit on a whiteboard while the other allows you to take a picture.\n\nSince this is still in development, do keep in mind of the following instructions to get the best output\n\n1) In Paint section, try writing the numbers very clearly and make sure that they are well confined and small in size (smaller than allotted space shown).\n\n2)In Camera section, I recommend you to write the digit on a white blank sheet of paper, with the digit being written in a black pen.\n\nHope you enjoy the app and stay tuned for more updates ;)\n\n</string>
 </resources>

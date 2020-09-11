@@ -209,6 +209,11 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
                 overridePendingTransition(R.anim.righttoleft, R.anim.righttoleft1);
                 finish();
                 break;
+            case R.id.nav_about:
+                startActivity(new Intent(getApplicationContext(), MyPage.class));
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                finish();
+                break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

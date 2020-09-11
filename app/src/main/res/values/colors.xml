@@ -9,4 +9,6 @@
     <color name="colorRedDark">#3A0000</color>
     <color name="colorGreenLight">#56CF00</color>
     <color name="colorGreenDark">#083500</color>
+    <color name="colorLightYellow">#FFC107</color>
+    <color name="colorDarkYellow">#433200</color>
 </resources>

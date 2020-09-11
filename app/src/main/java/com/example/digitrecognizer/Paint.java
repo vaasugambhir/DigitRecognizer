@@ -220,6 +220,11 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
                 overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright1);
                 finish();
                 break;
+            case R.id.nav_about:
+                startActivity(new Intent(getApplicationContext(), MyPage.class));
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                finish();
+                break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
