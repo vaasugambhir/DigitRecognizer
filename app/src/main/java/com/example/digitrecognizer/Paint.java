@@ -118,27 +118,31 @@ public class Paint extends AppCompatActivity implements NavigationView.OnNavigat
         player.start();
         alert.startLoading();
         int h = myDrawingKit.retHeight(), w = myDrawingKit.retWidth();
-        Bitmap px_colors_bitmap = createBitmapFromView(myDrawingKit, w, h);
-        String encodedImage = getStringImage(px_colors_bitmap);
+        final Bitmap px_colors_bitmap = createBitmapFromView(myDrawingKit, w, h);
 
-        // passing string in python
-        PyObject pyO = py.getModule("CharacterDetector");
-        PyObject obj = pyO.callAttr("main", encodedImage);
-        final String result = obj.toString();
-        new CountDownTimer(2000, 2000) {
+        new Thread(new Runnable() {
             @Override
-            public void onTick(long l) {
-            }
+            public void run() {
+                String encodedImage = getStringImage(px_colors_bitmap);
 
-            @Override
-            public void onFinish() {
-                alert.dismissDialog();
-                Toast.makeText(Paint.this, "The number is " + result, Toast.LENGTH_SHORT).show();
-                int number = Integer.parseInt(result);
-                VoicePlayer player = new VoicePlayer(getBaseContext(), number);
-                player.play();
+                // passing string in python
+                PyObject pyO = py.getModule("CharacterDetector");
+                PyObject obj = pyO.callAttr("main", encodedImage);
+
+                final String result = obj.toString();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        alert.dismissDialog();
+                        Toast.makeText(Paint.this, "The number is " + result, Toast.LENGTH_SHORT).show();
+                        int number = Integer.parseInt(result);
+                        VoicePlayer player = new VoicePlayer(getBaseContext(), number);
+                        player.play();
+                    }
+                });
             }
-        }.start();
+        }).start();
+
 
         /*
         myDrawingKit.setVisibility(View.INVISIBLE);

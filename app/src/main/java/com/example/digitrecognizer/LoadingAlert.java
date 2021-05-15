@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 
 public class LoadingAlert {
 
-    private Activity activity;
+    private final Activity activity;
     private AlertDialog dialog;
 
     public LoadingAlert(Activity activity) {

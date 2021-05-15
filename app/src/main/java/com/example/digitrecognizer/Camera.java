@@ -8,8 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
@@ -159,28 +159,31 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
         }
         alert.startLoading();
         BitmapDrawable drawable = (BitmapDrawable)myPic.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
-        String encodedImage = getStringImage(bitmap);
+        final Bitmap bitmap = drawable.getBitmap();
 
-        // passing string in python
-        PyObject pyO = py.getModule("CharacterDetector");
-        PyObject obj = pyO.callAttr("main", encodedImage);
-        final String result = obj.toString();
-
-        new CountDownTimer(2000, 2000) {
+        new Thread(new Runnable() {
             @Override
-            public void onTick(long millisUntilFinished) {
-            }
+            public void run() {
+                String encodedImage = getStringImage(bitmap);
 
-            @Override
-            public void onFinish() {
-                alert.dismissDialog();
-                Toast.makeText(Camera.this, "The number is " + result, Toast.LENGTH_SHORT).show();
-                int number = Integer.parseInt(result);
-                VoicePlayer player = new VoicePlayer(getBaseContext(), number);
-                player.play();
+                // passing string in python
+                PyObject pyO = py.getModule("CharacterDetector");
+                PyObject obj = pyO.callAttr("main", encodedImage);
+                final String result = obj.toString();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        alert.dismissDialog();
+                        Toast.makeText(Camera.this, "The number is " + result, Toast.LENGTH_SHORT).show();
+                        int number = Integer.parseInt(result);
+                        VoicePlayer player = new VoicePlayer(getBaseContext(), number);
+                        player.play();
+                    }
+                });
             }
-        }.start();
+        }).start();
+
 
         /*
         obj = pyO.callAttr("main2", encodedImage);
@@ -198,6 +201,7 @@ public class Camera extends AppCompatActivity implements NavigationView.OnNaviga
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         player1.start();
